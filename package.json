@@ -1,0 +1,16 @@
+{
+  "name": "rt-translator-discord-bot",
+  "version": "1.0.0",
+  "description": "A Discord bot that is able to translate a user's message's as they're being sent. Intended to help users communicate with each other in global servers.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "@_keobkeig (Richie X.)",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.11.0",
+    "dotenv": "^16.3.1"
+  }
+}
