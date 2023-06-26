@@ -4,14 +4,64 @@ const {REST, Routes}  = require('discord.js');
 
 const commands = [
     {
-        name: 'on', //command name
+        name: 'on', 
         description: "Turns on the translator"
+    },
+    {
+        name: 'off', 
+        description: "Turns off the translator"
+    },
+    {
+        name: 'help', 
+        description: "Shows the help menu"
+    },
+    {
+        name: 'set',
+        description: "Sets the language to translate to",
+        options: [
+            {
+                name: 'language',
+                description: "The language to translate to",
+                type: 3,
+                required: true,
+                choices: [
+                    {
+                        name: 'English',
+                        value: 'en'
+                    },
+                    {
+                        name: 'Spanish',
+                        value: 'es'
+                    },
+                    {
+                        name: 'Chinese(Simplified)',
+                        value: 'zh-CN'
+                    },
+                ]
+            }
+        ]
+
+    },
+    {
+        name: 'list',
+        description: "Lists all the languages available"
+    },
+    {
+        name: 'translate',
+        description: "Translates the message to the set language"
     },
 ]
 
+const rest = new REST({version: '9'}).setToken(process.env.TOKEN);
+
 (async() => {
     try {
-
+        console.log(`Registering slash commands...`)
+        await rest.put(
+            Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
+            {body: commands}
+        );
+        console.log(`Slash commands registered!`);
     }
     catch (error) {
         console.log(`Error: ${error}`);
