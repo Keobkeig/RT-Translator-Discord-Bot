@@ -12,10 +12,6 @@ const commands = [
         description: "Turns off the translator"
     },
     {
-        name: 'help', 
-        description: "Shows the help menu"
-    },
-    {
         name: 'set',
         description: "Sets the language to translate to",
         options: [

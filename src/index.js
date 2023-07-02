@@ -30,7 +30,6 @@ client.on('ready', (c) => {
 //     // console.log(msg.content);
 // });
 
-
 client.on('interactionCreate', async (interaction) => {
     if (!interaction.isCommand()) return;
     
@@ -40,13 +39,16 @@ client.on('interactionCreate', async (interaction) => {
       interaction.reply('Translator is on!');
     } else if (commandName === 'off') {
       interaction.reply('Translator is off!');
-    } else if (commandName === 'help') {
-      interaction.reply('Help menu!');
     } else if (commandName === 'set') {
       const language = options.getString('language');
       interaction.reply('Set language to ' + language + '!');
     } else if (commandName === 'list') {
-      interaction.reply('List languages!');
+      interaction.reply('List languages!'
+        + '\nEnglish: en'
+        + '\nSpanish: es'
+        + '\nChinese(Simplified): zh-CN'
+      );
+
     } else if (commandName === 'translate') {
       const message = options.getString('message');
       const language = options.getString('language');
