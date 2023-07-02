@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const {REST, Routes}  = require('discord.js');
+const {REST, Routes, ApplicationCommandOptionType}  = require('discord.js');
 
 const commands = [
     {
@@ -48,17 +48,45 @@ const commands = [
     },
     {
         name: 'translate',
-        description: "Translates the message to the set language"
+        description: "Translates the message to the set language",
+        options: [
+            {
+                name: 'message',
+                description: "The message to translate",
+                type: ApplicationCommandOptionType.String,
+                required: true,
+            },
+            {
+                name: 'language',
+                description: "The language to translate to",
+                type: ApplicationCommandOptionType.String,
+                required: true,
+                choices: [
+                    {
+                        name: 'English',
+                        value: 'en'
+                    },
+                    {
+                        name: 'Spanish',
+                        value: 'es'
+                    },
+                    {
+                        name: 'Chinese(Simplified)',
+                        value: 'zh-CN'
+                    },
+                ]
+            }
+        ]
     },
 ]
 
-const rest = new REST({version: '9'}).setToken(process.env.TOKEN);
+const rest = new REST({version: '9'}).setToken(process.env['TOKEN']);
 
 (async() => {
     try {
         console.log(`Registering slash commands...`)
         await rest.put(
-            Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
+            Routes.applicationGuildCommands(process.env['BOT_ID'], process.env['GUILD_ID']),
             {body: commands}
         );
         console.log(`Slash commands registered!`);
@@ -66,4 +94,4 @@ const rest = new REST({version: '9'}).setToken(process.env.TOKEN);
     catch (error) {
         console.log(`Error: ${error}`);
     }
-});
+})();
